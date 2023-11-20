@@ -9,19 +9,52 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class SbbApplicationTests {
 
-	@Autowired
-	private QuestionRepository questionRepository;
+    @Autowired
+    private QuestionRepository questionRepository;
+    @Autowired
+    private AnswerRepository answerRepository;
 
-	@Test
+    @Test
 	void testJpa(){
-		List<Question> qList = this.questionRepository.findBySubjectLike("sbb%");
-		Question q = qList.get(0);
-		assertEquals("sbb가 무엇인가요?", q.getSubject());
+		Optional<Question> oq = this.questionRepository.findById(2);
+		assertTrue(oq.isPresent());
+		Question q = oq.get();
+
+		Answer a = new Answer();
+		a.setContent("네 자동으로 생성됩니다.");
+		a.setQuestion(q);  // 어떤 질문에 대한 답변인지 알기 위해 Question 객체 연결
+		a.setCreateDate(LocalDateTime.now());
+		this.answerRepository.save(a);
 	}
+
+//	void testJpa() {
+//		assertEquals(2, this.questionRepository.count());
+//		Optional<Question> oq = this.questionRepository.findById(1);
+//		assertTrue(oq.isPresent());
+//		Question q = oq.get();
+//		this.questionRepository.delete(q);
+//		assertEquals(1, this.questionRepository.count());
+//	}
+
+//	void testJpa() {
+//		Optional<Question> oq = this.questionRepository.findById(1);
+//		assertTrue(oq.isPresent());
+//		Question q = oq.get();
+//		q.setSubject("수정된 제목");
+//		this.questionRepository.save(q);
+//	}
+
+//	void testJpa(){
+//		List<Question> qList = this.questionRepository.findBySubjectLike("sbb%");
+//		Question q = qList.get(0);
+//		assertEquals("sbb가 무엇인가요?", q.getSubject());
+//	}
+
 //
 //	void testJpa(){
 //		Question q = this.questionRepository.findBySubjectAndContent(
