@@ -16,22 +16,24 @@ repositories {
 }
 
 dependencies {
-	// devtools
+	// Devtools
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	//스프링 웹
+	// Spring Web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// Spring Validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-	//롬복
+	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
-	//H2 데이터베이스
+	//H2 Database
 	runtimeOnly 'com.h2database:h2'
 
-	// JPA(Java Persistence API
+	// JPA(Java Persistence API)
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-	// 타임리프
+	// thymeleaf
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 
