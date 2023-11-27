@@ -50,6 +50,10 @@ public class QuestionService {
     this.questionRepository.save(question);
     }
 
+    public void delete(Question question){
+        this.questionRepository.delete(question);
+    }
+
 
 
 }
